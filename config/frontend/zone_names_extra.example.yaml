@@ -1,0 +1,272 @@
+default:
+  delivery_days: "15-30"
+eu:
+  delivery_days: "2-5"
+us:
+  default:
+    delivery_days: "7-14"
+  al:
+    delivery_days: "7-14"
+  ak:
+    delivery_days: "10-21"
+  az:
+    delivery_days: "7-14"
+  ar:
+    delivery_days: "7-14"
+  ca:
+    delivery_days: "7-14"
+  co:
+    delivery_days: "7-14"
+  ct:
+    delivery_days: "7-14"
+  de:
+    delivery_days: "7-14"
+  dc:
+    delivery_days: "7-14"
+  fl:
+    delivery_days: "7-14"
+  ga:
+    delivery_days: "7-14"
+  hi:
+    delivery_days: "10-21"
+  id:
+    delivery_days: "7-14"
+  il:
+    delivery_days: "7-14"
+  in:
+    delivery_days: "7-14"
+  ia:
+    delivery_days: "7-14"
+  ks:
+    delivery_days: "7-14"
+  ky:
+    delivery_days: "7-14"
+  la:
+    delivery_days: "7-14"
+  me:
+    delivery_days: "7-14"
+  md:
+    delivery_days: "7-14"
+  ma:
+    delivery_days: "7-14"
+  mi:
+    delivery_days: "7-14"
+  mn:
+    delivery_days: "7-14"
+  ms:
+    delivery_days: "7-14"
+  mo:
+    delivery_days: "7-14"
+  mt:
+    delivery_days: "7-14"
+  ne:
+    delivery_days: "7-14"
+  nv:
+    delivery_days: "7-14"
+  nh:
+    delivery_days: "7-14"
+  nj:
+    delivery_days: "7-14"
+  nm:
+    delivery_days: "7-14"
+  ny:
+    delivery_days: "7-14"
+  nc:
+    delivery_days: "7-14"
+  nd:
+    delivery_days: "7-14"
+  oh:
+    delivery_days: "7-14"
+  ok:
+    delivery_days: "7-14"
+  or:
+    delivery_days: "7-14"
+  pa:
+    delivery_days: "7-14"
+  ri:
+    delivery_days: "7-14"
+  sc:
+    delivery_days: "7-14"
+  sd:
+    delivery_days: "7-14"
+  tn:
+    delivery_days: "7-14"
+  tx:
+    delivery_days: "7-14"
+  ut:
+    delivery_days: "7-14"
+  vt:
+    delivery_days: "7-14"
+  va:
+    delivery_days: "7-14"
+  wa:
+    delivery_days: "7-14"
+  wv:
+    delivery_days: "7-14"
+  wi:
+    delivery_days: "7-14"
+  wy:
+    delivery_days: "7-14"
+ca:
+  default:
+    delivery_days: "7-15"
+  on:
+    delivery_days: "7-14"
+  qc:
+    delivery_days: "7-14"
+  bc:
+    delivery_days: "8-15"
+  ab:
+    delivery_days: "8-15"
+  mb:
+    delivery_days: "8-15"
+  sk:
+    delivery_days: "8-15"
+  ns:
+    delivery_days: "7-14"
+  nb:
+    delivery_days: "7-14"
+  nl:
+    delivery_days: "8-15"
+  pe:
+    delivery_days: "7-14"
+  nt:
+    delivery_days: "12-21"
+  yt:
+    delivery_days: "12-21"
+  nu:
+    delivery_days: "14-25"
+cn:
+  default:
+    delivery_days: "10-20"
+  bj:
+    delivery_days: "10-18"
+  sh:
+    delivery_days: "10-18"
+  gd:
+    delivery_days: "10-18"
+  zj:
+    delivery_days: "10-18"
+  js:
+    delivery_days: "10-18"
+  sd:
+    delivery_days: "10-20"
+  he:
+    delivery_days: "10-20"
+  ha:
+    delivery_days: "10-20"
+  ah:
+    delivery_days: "10-20"
+  hb:
+    delivery_days: "10-20"
+  hn:
+    delivery_days: "10-20"
+  jx:
+    delivery_days: "10-20"
+  fj:
+    delivery_days: "10-20"
+  sc:
+    delivery_days: "12-22"
+  cq:
+    delivery_days: "12-22"
+  sn:
+    delivery_days: "12-22"
+  sx:
+    delivery_days: "12-22"
+  ln:
+    delivery_days: "12-22"
+  jl:
+    delivery_days: "12-22"
+  hl:
+    delivery_days: "12-22"
+  yn:
+    delivery_days: "12-22"
+  gz:
+    delivery_days: "12-22"
+  hi:
+    delivery_days: "12-22"
+  gs:
+    delivery_days: "14-25"
+  qh:
+    delivery_days: "14-25"
+  nx:
+    delivery_days: "14-25"
+  nm:
+    delivery_days: "14-25"
+  gx:
+    delivery_days: "12-22"
+  xj:
+    delivery_days: "15-30"
+  xz:
+    delivery_days: "15-30"
+  hk:
+    delivery_days: "7-14"
+  mo:
+    delivery_days: "7-14"
+  tw:
+    delivery_days: "7-14"
+ru:
+  default:
+    delivery_days: "10-25"
+  mow:
+    delivery_days: "7-14"
+  spe:
+    delivery_days: "7-14"
+  cfo:
+    delivery_days: "10-15"
+  szfo:
+    delivery_days: "10-15"
+  yvfo:
+    delivery_days: "10-18"
+  skfo:
+    delivery_days: "12-20"
+  pfo:
+    delivery_days: "12-18"
+  urfo:
+    delivery_days: "14-20"
+  sfo:
+    delivery_days: "15-25"
+  dfo:
+    delivery_days: "20-30"
+kz:
+  delivery_days: "10-20"
+by:
+  delivery_days: "5-10"
+ua:
+  delivery_days: "10-15"
+uz:
+  delivery_days: "12-20"
+am:
+  delivery_days: "7-15"
+ge:
+  delivery_days: "7-15"
+uk:
+  delivery_days: "3-7"
+ch:
+  delivery_days: "2-5"
+no:
+  delivery_days: "3-7"
+jp:
+  delivery_days: "7-14"
+kr:
+  delivery_days: "7-14"
+sg:
+  delivery_days: "5-10"
+au:
+  delivery_days: "10-20"
+nz:
+  delivery_days: "10-20"
+ae:
+  delivery_days: "5-10"
+sa:
+  delivery_days: "7-14"
+tr:
+  delivery_days: "5-10"
+mx:
+  delivery_days: "10-20"
+br:
+  delivery_days: "15-25"
+in:
+  delivery_days: "10-20"
+za:
+  delivery_days: "10-20"

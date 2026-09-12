@@ -1,0 +1,7 @@
+user_settings:
+  settings_default:
+    preferred_payment_currency: "USDT"
+    preferred_network: "TRC20"
+    particles_style: "both"
+    custom_theme: null
+    custom_language_code: null

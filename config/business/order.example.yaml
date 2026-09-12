@@ -1,0 +1,6 @@
+order_settings:
+  order_pending_limit: 3
+  order_lifetime_minutes: 60
+
+promocode_settings:
+  default_promo_expiration: 30

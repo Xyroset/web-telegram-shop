@@ -1,0 +1,37 @@
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            set -e
+
+            cd ~/Web-telegram-shop
+
+            echo "Current HEAD before pull:"
+            git rev-parse HEAD
+
+            git fetch origin main
+
+            git reset --hard origin/main
+
+            echo "Current HEAD after reset:"
+            git rev-parse HEAD
+
+            make up-prod ARGS="--build"
+
+            docker image prune -f

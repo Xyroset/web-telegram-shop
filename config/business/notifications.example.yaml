@@ -1,0 +1,26 @@
+notifications_settings:
+  providers_settings:
+    telegram:
+      admin_chat_id: ""
+      order_paid_thread_id: 1
+      transaction_failed_thread_id: 2
+      support_thread_id: 3
+      system_thread_id: 4
+      language: "en"
+
+    emails:
+      admin_emails:
+        - "admin@yourdomain.com"
+      language: "en"
+
+    webhook:
+      admin_webhook_url:
+        - "admin.webhook.com"
+
+  order_paid: ["telegram"]
+
+  transaction_failed: ["telegram"]
+
+  support: ["telegram"]
+
+  system: ["telegram"]

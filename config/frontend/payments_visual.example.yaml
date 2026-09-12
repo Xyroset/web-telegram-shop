@@ -1,0 +1,122 @@
+default_payment_gateway: "nowpayments"
+
+providers:
+  nowpayments:
+    display_name: "Crypto (NOWPayments)"
+    icon_url: "/icons/providers/nowpayments.svg"
+    buyer_fee_percent: 0.5
+    currencies:
+      usdt:
+        display_name: "Tether (USDT)"
+        icon_url: "https://cryptologos.cc/logos/tether-usdt-logo.svg"
+        networks:
+          - id: "trc20"
+            name: "TRC-20"
+          - id: "erc20"
+            name: "ERC-20"
+          - id: "bsc"
+            name: "BEP-20 (BSC)"
+          - id: "sol"
+            name: "Solana"
+      usdc:
+        display_name: "USD Coin (USDC)"
+        icon_url: "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+          - id: "matic"
+            name: "Polygon (MATIC)"
+      btc:
+        display_name: "Bitcoin (BTC)"
+        icon_url: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+      eth:
+        display_name: "Ethereum (ETH)"
+        icon_url: "https://cryptologos.cc/logos/ethereum-eth-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+          - id: "bsc"
+            name: "BEP-20 (BSC)"
+      ltc:
+        display_name: "Litecoin (LTC)"
+        icon_url: "https://cryptologos.cc/logos/litecoin-ltc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+      trx:
+        display_name: "TRON (TRX)"
+        icon_url: "https://cryptologos.cc/logos/tron-trx-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+      ton:
+        display_name: "Toncoin (TON)"
+        icon_url: "https://cryptologos.cc/logos/toncoin-ton-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+      bnb:
+        display_name: "BNB"
+        icon_url: "https://cryptologos.cc/logos/bnb-bnb-logo.svg"
+        networks:
+          - id: "internal"
+            name: "Mainnet"
+          - id: "bsc"
+            name: "BEP-20 (BSC)"
+
+  cryptobot:
+    display_name: "Telegram Wallet (@CryptoBot)"
+    icon_url: "/icons/providers/cryptobot.jpg"
+    buyer_fee_percent: 3.0
+    currencies:
+      usdt:
+        display_name: "Tether (USDT)"
+        icon_url: "https://cryptologos.cc/logos/tether-usdt-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      ton:
+        display_name: "Toncoin (TON)"
+        icon_url: "https://cryptologos.cc/logos/toncoin-ton-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      btc:
+        display_name: "Bitcoin (BTC)"
+        icon_url: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      eth:
+        display_name: "Ethereum (ETH)"
+        icon_url: "https://cryptologos.cc/logos/ethereum-eth-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      ltc:
+        display_name: "Litecoin (LTC)"
+        icon_url: "https://cryptologos.cc/logos/litecoin-ltc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      bnb:
+        display_name: "BNB"
+        icon_url: "https://cryptologos.cc/logos/bnb-bnb-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      trx:
+        display_name: "TRON (TRX)"
+        icon_url: "https://cryptologos.cc/logos/tron-trx-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"
+      usdc:
+        display_name: "USD Coin (USDC)"
+        icon_url: "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg"
+        networks:
+          - id: "internal"
+            name: "CryptoBot Internal"

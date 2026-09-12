@@ -1,0 +1,4 @@
+support_settings:
+  limit_active_tickets_per_user: 3
+  language: "en"
+  max_topic_older_than_days: 7

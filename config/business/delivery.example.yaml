@@ -1,0 +1,156 @@
+delivery_settings:
+  base_rate: 15.00
+  rete_per_kg: 5.00
+  free_shipping_threshold: 250.0
+  max_multiplier_free_shipping_threshold: 2.0
+  default_multiplier: 4.0
+  default_provider_code: "AUTO"
+
+zone_multipliers:
+  default_world: 4.0
+  eu: 1.0
+
+  us:
+    default: 2.5
+    al: 2.5
+    ak: 3.5
+    az: 2.5
+    ar: 2.5
+    ca: 2.6
+    co: 2.5
+    ct: 2.4
+    de: 2.4
+    dc: 2.4
+    fl: 2.5
+    ga: 2.5
+    hi: 3.8
+    id: 2.5
+    il: 2.5
+    in: 2.5
+    ia: 2.5
+    ks: 2.5
+    ky: 2.5
+    la: 2.5
+    me: 2.4
+    md: 2.4
+    ma: 2.4
+    mi: 2.5
+    mn: 2.5
+    ms: 2.5
+    mo: 2.5
+    mt: 2.5
+    ne: 2.5
+    nv: 2.5
+    nh: 2.4
+    nj: 2.4
+    nm: 2.5
+    ny: 2.4
+    nc: 2.4
+    nd: 2.5
+    oh: 2.5
+    ok: 2.5
+    or: 2.6
+    pa: 2.4
+    ri: 2.4
+    sc: 2.5
+    sd: 2.5
+    tn: 2.5
+    tx: 2.5
+    ut: 2.5
+    vt: 2.4
+    va: 2.4
+    wa: 2.6
+    wv: 2.4
+    wi: 2.5
+    wy: 2.5
+
+  ca:
+    default: 2.6
+    on: 2.5
+    qc: 2.5
+    bc: 2.7
+    ab: 2.6
+    mb: 2.6
+    sk: 2.6
+    ns: 2.5
+    nb: 2.5
+    nl: 2.5
+    pe: 2.5
+    nt: 4.0
+    yt: 4.0
+    nu: 4.5
+
+  cn:
+    default: 3.0
+    bj: 2.8
+    sh: 2.8
+    gd: 2.8
+    zj: 2.9
+    js: 2.9
+    sd: 2.9
+    he: 2.9
+    ha: 3.0
+    ah: 3.0
+    hb: 3.0
+    hn: 3.0
+    jx: 3.0
+    fj: 3.0
+    sc: 3.1
+    cq: 3.1
+    sn: 3.1
+    sx: 3.1
+    ln: 3.1
+    jl: 3.1
+    hl: 3.2
+    yn: 3.2
+    gz: 3.2
+    hi: 3.3
+    gs: 3.3
+    qh: 3.4
+    nx: 3.3
+    nm: 3.3
+    gx: 3.1
+    xj: 3.5
+    xz: 3.8
+    hk: 2.7
+    mo: 2.8
+    tw: 2.8
+
+  ru:
+    default: 2.5
+    mow: 2.2
+    spe: 2.2
+    cfo: 2.3
+    szfo: 2.3
+    yvfo: 2.4
+    skfo: 2.4
+    pfo: 2.4
+    urfo: 2.6
+    sfo: 2.8
+    dfo: 3.5
+
+  uk: 1.3
+  ch: 1.2
+  no: 1.3
+
+  ua: 1.6
+  by: 2.0
+  kz: 2.2
+  uz: 2.4
+  am: 1.8
+  ge: 1.7
+
+  tr: 1.5
+  ae: 2.3
+  sa: 2.4
+
+  jp: 3.0
+  kr: 3.0
+  sg: 2.8
+  in: 3.2
+  au: 4.0
+  nz: 4.0
+
+  mx: 3.2
+  br: 3.5
+  za: 3.5

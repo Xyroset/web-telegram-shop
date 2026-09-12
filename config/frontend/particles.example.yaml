@@ -1,0 +1,42 @@
+render:
+  fillOpacity: 0.15
+
+base:
+  baseVelocity: 0.8
+  minSize: 1
+  maxSize: 3
+  minAlpha: 0.5
+  maxAlpha: 1.0
+  friction: 0.96
+  minSpeed: 0.3
+  speedBoost: 1.05
+
+mouse:
+  maxDistance: 150
+  repelDistance: 50
+  repelForce: 0.6
+  pullForce: 0.12
+  tangentialForce: 0.04
+
+density:
+  target: 4000
+  minCount: 50
+  maxCount: 800
+
+lines:
+  repelDistance: 70
+  repelForce: 0.1
+  connectDistance: 90
+  width: 1.5
+
+theme:
+  darkColors:
+    - "rgba(96, 165, 250"
+    - "rgba(167, 139, 250"
+    - "rgba(56, 189, 248"
+  lightColors:
+    - "rgba(37, 99, 235"
+    - "rgba(79, 70, 229"
+    - "rgba(14, 165, 233"
+  darkLineRGB: "167, 139, 250"
+  lightLineRGB: "37, 99, 235"

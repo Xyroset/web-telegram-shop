@@ -1,0 +1,792 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-17 23:40+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+#: apps/basket/apps.py:8 apps/basket/models.py:27 apps/basket/models.py:69
+msgid "Basket"
+msgstr "Cesta"
+#: apps/basket/models.py:23 apps/catalog/models.py:339
+#: apps/catalog/models.py:383 apps/orders/models.py:187
+#: apps/support/models.py:32 apps/users/models.py:54 apps/users/models.py:124
+#: apps/users/models.py:216
+msgid "User"
+msgstr "Usuario"
+#: apps/basket/models.py:28
+msgid "Baskets"
+msgstr "Cestas"
+#: apps/basket/models.py:74 apps/catalog/models.py:164
+msgid "Product Variant"
+msgstr "Variante de producto"
+#: apps/basket/models.py:76 apps/orders/models.py:331
+msgid "Quantity"
+msgstr "Cantidad"
+#: apps/basket/models.py:79
+msgid "Basket Item"
+msgstr "Artículo de la cesta"
+#: apps/basket/models.py:80
+msgid "Basket Items"
+msgstr "Artículos de la cesta"
+#: apps/catalog/admin.py:57
+msgid "Paste keys here, one per line..."
+msgstr "Pegue las claves aquí, una por línea..."
+#: apps/catalog/admin.py:59
+msgid ""
+"Paste new keys here. They will be processed and saved as Digital Assets upon "
+"saving the form."
+msgstr "Pegue nuevas claves aquí. Se procesarán y guardarán como Activos Digitales al guardar el formulario."
+#: apps/catalog/admin.py:60
+msgid "Bulk keys"
+msgstr "Claves masivas"
+#: apps/catalog/admin.py:67
+msgid ""
+"Size: S, M, L\n"
+"Color: Black, Gray\n"
+"Style: Oversize, Fit"
+msgstr "Talla: S, M, L\nColor: negro, gris\nEstilo: Oversize, Ajuste"
+#: apps/catalog/admin.py:72
+msgid ""
+"Generate variations automatically. Use format 'Attribute: val1, val2'. Each "
+"line creates a new dimension."
+msgstr "Genera variaciones automáticamente. Utilice el formato 'Atributo: val1, val2'. Cada línea crea una nueva dimensión."
+#: apps/catalog/admin.py:74
+msgid "Matrix combination"
+msgstr "combinación de matrices"
+#: apps/catalog/admin.py:91
+#, python-format
+msgid "Invalid format. Line '%(line)s' is missing a colon (:)."
+msgstr "Formato no válido. A la línea '%(line)s' le faltan dos puntos (:)."
+#: apps/catalog/admin.py:98
+#, python-format
+msgid "No values provided for attribute '%(key)s'."
+msgstr "No se proporcionaron valores para el atributo '%(key)s'."
+#: apps/catalog/admin.py:171
+msgid ""
+"Material: Cotton\n"
+"Color: Black\n"
+"Weight: 500g"
+msgstr "Material: Algodón\nColor: Negro\nPeso: 500g"
+#: apps/catalog/admin.py:173
+msgid "One per line 'Label: Value'. JSON object/array is also accepted."
+msgstr "Uno por línea 'Etiqueta: Valor'. También se aceptan objetos/matriz JSON."
+#: apps/catalog/admin.py:174 apps/catalog/models.py:85
+msgid "Attributes"
+msgstr "Atributos"
+#: apps/catalog/admin.py:242
+#, python-format
+msgid "Successfully added %(count)d digital assets."
+msgstr "Se agregaron con éxito %(count)d activos digitales."
+#: apps/catalog/admin.py:249
+#, python-format
+msgid ""
+"Matrix generated! Adapted base variant and cloned %(count)d new variants."
+msgstr "¡Matriz generada! Variante base adaptada y nuevas variantes clonadas %(count)d."
+#: apps/catalog/admin.py:260
+msgid "Sync All Digital Stock"
+msgstr "Sincronizar todo el stock digital"
+#: apps/catalog/admin.py:275
+#, python-format
+msgid "Successfully synchronized stock for %(count)d digital variants."
+msgstr "Stock sincronizado correctamente para %(count)d variantes digitales."
+#: apps/catalog/admin.py:281
+#, python-format
+msgid "Failed to synchronize digital stock. System error: %(error)s"
+msgstr "No se pudo sincronizar el stock digital. Error del sistema: %(error)s"
+#: apps/catalog/admin.py:314
+msgid "Detail settings"
+msgstr "Configuración detallada"
+#: apps/catalog/admin.py:319
+msgid "Manage detail"
+msgstr "Gestionar detalle"
+#: apps/catalog/admin.py:322
+msgid "Save product to add product variant"
+msgstr "Guardar producto para agregar variante de producto"
+#: apps/catalog/admin.py:365
+msgid "User Review"
+msgstr "Revisión del usuario"
+#: apps/catalog/admin.py:366
+msgid "Admin Response"
+msgstr "Respuesta del administrador"
+#: apps/catalog/admin.py:367 apps/delivery/admin.py:58
+#: apps/payments/admin.py:62 apps/support/admin.py:86 apps/users/admin.py:114
+msgid "Timestamps"
+msgstr "Marcas de tiempo"
+#: apps/catalog/apps.py:8
+msgid "Catalog"
+msgstr "Catalogar"
+#: apps/catalog/models.py:28 apps/catalog/models.py:40
+#: apps/catalog/models.py:56
+msgid "Name"
+msgstr "Nombre"
+#: apps/catalog/models.py:29 apps/catalog/models.py:41
+msgid "Slug"
+msgstr "Babosa"
+#: apps/catalog/models.py:32 apps/catalog/models.py:62
+#: apps/support/models.py:44
+msgid "Category"
+msgstr "Categoría"
+#: apps/catalog/models.py:33 apps/orders/models.py:61
+msgid "Categories"
+msgstr "Categorías"
+#: apps/catalog/models.py:44
+msgid "Tag"
+msgstr "Etiqueta"
+#: apps/catalog/models.py:45 apps/catalog/models.py:148
+#: apps/orders/models.py:63
+msgid "Tags"
+msgstr "Etiquetas"
+#: apps/catalog/models.py:53
+msgid "Physical"
+msgstr "Físico"
+#: apps/catalog/models.py:54
+msgid "Digital"
+msgstr "Digital"
+#: apps/catalog/models.py:68
+msgid "Product Type"
+msgstr "Tipo de producto"
+#: apps/catalog/models.py:75
+msgid "Main Image"
+msgstr "Imagen principal"
+#: apps/catalog/models.py:82
+msgid "Video File"
+msgstr "Archivo de vídeo"
+#: apps/catalog/models.py:84
+msgid "Video URL"
+msgstr "URL del vídeo"
+#: apps/catalog/models.py:86
+msgid "Base Description"
+msgstr "Descripción básica"
+#: apps/catalog/models.py:89 apps/catalog/models.py:130
+#: apps/catalog/models.py:318 apps/catalog/models.py:342
+#: apps/catalog/models.py:385
+msgid "Product"
+msgstr "Producto"
+#: apps/catalog/models.py:90
+msgid "Products"
+msgstr "Productos"
+#: apps/catalog/models.py:95
+msgid "You can either upload a video file OR paste a video URL, but not both."
+msgstr "Puedes cargar un archivo de vídeo O pegar la URL de un vídeo, pero no ambas cosas."
+#: apps/catalog/models.py:125
+msgid "In Stock"
+msgstr "En stock"
+#: apps/catalog/models.py:126
+msgid "Low Stock"
+msgstr "Existencias bajas"
+#: apps/catalog/models.py:127
+msgid "Out of Stock"
+msgstr "Agotado"
+#: apps/catalog/models.py:132
+msgid "Title"
+msgstr "Título"
+#: apps/catalog/models.py:133
+msgid "Badge"
+msgstr "Insignia"
+#: apps/catalog/models.py:139 apps/catalog/models.py:323
+#: apps/catalog/models.py:398
+msgid "Image"
+msgstr "Imagen"
+#: apps/catalog/models.py:141
+msgid "Price"
+msgstr "Precio"
+#: apps/catalog/models.py:142
+msgid "Old Price"
+msgstr "Precio anterior"
+#: apps/catalog/models.py:143
+msgid "Discount Expires At"
+msgstr "El descuento vence en"
+#: apps/catalog/models.py:145
+msgid "Available Stock"
+msgstr "Existencias disponibles"
+#: apps/catalog/models.py:146
+msgid "Reserved Stock"
+msgstr "Stock reservado"
+#: apps/catalog/models.py:150
+msgid "Specific Description"
+msgstr "Descripción específica"
+#: apps/catalog/models.py:153
+msgid "Weight (kg)"
+msgstr "Peso (kg)"
+#: apps/catalog/models.py:154
+msgid "Length (cm)"
+msgstr "Longitud (cm)"
+#: apps/catalog/models.py:155
+msgid "Width (cm)"
+msgstr "Ancho (cm)"
+#: apps/catalog/models.py:156
+msgid "Height (cm)"
+msgstr "Altura (cm)"
+#: apps/catalog/models.py:158 apps/orders/models.py:194
+#: apps/payments/models.py:72
+msgid "Task ID"
+msgstr "ID de tarea"
+#: apps/catalog/models.py:160
+msgid "Universal field"
+msgstr "campo universal"
+#: apps/catalog/models.py:160 apps/orders/models.py:195
+msgid "Metadata"
+msgstr "Metadatos"
+#: apps/catalog/models.py:165
+msgid "Product Variants"
+msgstr "Variantes de producto"
+#: apps/catalog/models.py:270 apps/orders/models.py:329
+msgid "Variant"
+msgstr "Variante"
+#: apps/catalog/models.py:272
+msgid "Content"
+msgstr "Contenido"
+#: apps/catalog/models.py:273
+msgid "Is Used"
+msgstr "se utiliza"
+#: apps/catalog/models.py:280
+msgid "Order Item"
+msgstr "Artículo de pedido"
+#: apps/catalog/models.py:284
+msgid "Digital Asset"
+msgstr "Activo Digital"
+#: apps/catalog/models.py:285
+msgid "Digital Assets"
+msgstr "Activos digitales"
+#: apps/catalog/models.py:325
+msgid "Ordering"
+msgstr "Realizar pedidos"
+#: apps/catalog/models.py:328 apps/users/models.py:201
+msgid "Photo"
+msgstr "Foto"
+#: apps/catalog/models.py:329
+msgid "Photos"
+msgstr "Fotos"
+#: apps/catalog/models.py:345
+msgid "Is Anonymous"
+msgstr "es anónimo"
+#: apps/catalog/models.py:347
+msgid "Rating"
+msgstr "Clasificación"
+#: apps/catalog/models.py:349 apps/support/models.py:143
+msgid "Text"
+msgstr "Texto"
+#: apps/catalog/models.py:351
+msgid "Admin Reply Text"
+msgstr "Texto de respuesta del administrador"
+#: apps/catalog/models.py:352
+msgid "Admin Reply Created At"
+msgstr "Respuesta del administrador creada en"
+#: apps/catalog/models.py:355 apps/catalog/models.py:397
+msgid "Review"
+msgstr "Revisar"
+#: apps/catalog/models.py:356
+msgid "Reviews"
+msgstr "Reseñas"
+#: apps/catalog/models.py:388
+msgid "Favorite Item"
+msgstr "Artículo favorito"
+#: apps/catalog/models.py:389
+msgid "Favorite Items"
+msgstr "Artículos favoritos"
+#: apps/catalog/models.py:401
+msgid "Review Photo"
+msgstr "Revisar foto"
+#: apps/catalog/models.py:402
+msgid "Review Photos"
+msgstr "Revisar fotos"
+#: apps/core/apps.py:8
+msgid "Core"
+msgstr "Centro"
+#: apps/core/models.py:8
+msgid "Created at"
+msgstr "Creado en"
+#: apps/core/models.py:9
+msgid "Updated at"
+msgstr "Actualizado en"
+#: apps/core/models.py:10
+msgid "Is active"
+msgstr "esta activo"
+#: apps/delivery/admin.py:37
+msgid "General Information"
+msgstr "Información general"
+#: apps/delivery/admin.py:43
+msgid "Fulfillment Details"
+msgstr "Detalles de cumplimiento"
+#: apps/delivery/admin.py:46
+msgid "Update the provider and tracking number before marking as shipped."
+msgstr "Actualice el proveedor y el número de seguimiento antes de marcarlo como enviado."
+#: apps/delivery/admin.py:50
+msgid "Snapshot Data"
+msgstr "Datos instantáneos"
+#: apps/delivery/admin.py:54
+msgid "Immutable snapshot of the shipping address at the time of checkout."
+msgstr "Instantánea inmutable de la dirección de envío en el momento del pago."
+#: apps/delivery/admin.py:68
+msgid "Order ID"
+msgstr "ID de pedido"
+#: apps/delivery/admin.py:73
+msgid "Mark as Shipped"
+msgstr "Marcar como enviado"
+#: apps/delivery/admin.py:80
+msgid "Delivery successfully marked as shipped."
+msgstr "Entrega marcada correctamente como enviada."
+#: apps/delivery/admin.py:82
+msgid "Conflict: "
+msgstr "Conflicto:"
+#: apps/delivery/admin.py:85 apps/delivery/admin.py:101
+#: apps/delivery/admin.py:117
+msgid "An unexpected error occurred."
+msgstr "Se produjo un error inesperado."
+#: apps/delivery/admin.py:89
+msgid "Mark as Delivered"
+msgstr "Marcar como entregado"
+#: apps/delivery/admin.py:96
+msgid "Delivery successfully marked as delivered."
+msgstr "Entrega marcada correctamente como entregada."
+#: apps/delivery/admin.py:98 apps/delivery/admin.py:114
+#, python-format
+msgid "Conflict: %(error)s"
+msgstr "Conflicto: %(error)s"
+#: apps/delivery/admin.py:105
+msgid "Mark as Returned"
+msgstr "Marcar como devuelto"
+#: apps/delivery/admin.py:112
+msgid "Delivery successfully marked as returned."
+msgstr "Entrega marcada correctamente como devuelta."
+#: apps/delivery/apps.py:8 apps/delivery/models.py:57
+msgid "Delivery"
+msgstr "Entrega"
+#: apps/delivery/models.py:16
+msgid "Pending"
+msgstr "Pendiente"
+#: apps/delivery/models.py:17
+msgid "Processing"
+msgstr "Tratamiento"
+#: apps/delivery/models.py:18
+msgid "Shipped"
+msgstr "Enviado"
+#: apps/delivery/models.py:19
+msgid "Delivered"
+msgstr "Entregado"
+#: apps/delivery/models.py:20 apps/payments/models.py:22
+msgid "Failed"
+msgstr "Fallido"
+#: apps/delivery/models.py:21 apps/orders/models.py:166
+#: apps/payments/models.py:21
+msgid "Cancelled"
+msgstr "Cancelado"
+#: apps/delivery/models.py:22
+msgid "Returned"
+msgstr "Devuelto"
+#: apps/delivery/models.py:28 apps/orders/models.py:171
+#: apps/orders/models.py:322 apps/payments/models.py:31
+msgid "Order"
+msgstr "Orden"
+#: apps/delivery/models.py:34 apps/orders/models.py:181
+#: apps/payments/models.py:69 apps/support/models.py:38
+msgid "State"
+msgstr "Estado"
+#: apps/delivery/models.py:39
+msgid "Provider Code"
+msgstr "Código de proveedor"
+#: apps/delivery/models.py:45
+msgid "Tracking Number"
+msgstr "El número de rastreo"
+#: apps/delivery/models.py:50
+msgid "Cost"
+msgstr "Costo"
+#: apps/delivery/models.py:53
+msgid "Delivery Data"
+msgstr "Datos de entrega"
+#: apps/delivery/models.py:58
+msgid "Deliveries"
+msgstr "Entregas"
+#: apps/notifications/apps.py:8
+msgid "Notifications"
+msgstr "Notificaciones"
+#: apps/orders/admin.py:52 apps/payments/admin.py:44
+msgid "Basic information"
+msgstr "Información básica"
+#: apps/orders/admin.py:56
+msgid "System information"
+msgstr "Información del sistema"
+#: apps/orders/admin.py:66
+msgid "Cancel Order"
+msgstr "Cancelar pedido"
+#: apps/orders/admin.py:85
+msgid "Order successfully cancelled and inventory returned."
+msgstr "El pedido se canceló correctamente y se devolvió el inventario."
+#: apps/orders/admin.py:89 apps/payments/admin.py:84 apps/payments/admin.py:124
+#, python-format
+msgid "Error: %(error)s"
+msgstr "Error: %(error)s"
+#: apps/orders/admin.py:103
+msgid "Size promotion"
+msgstr "Promoción de tallas"
+#: apps/orders/admin.py:106
+msgid "Fix"
+msgstr "Arreglar"
+#: apps/orders/admin.py:107
+msgid "Percent"
+msgstr "Por ciento"
+#: apps/orders/apps.py:8 apps/orders/models.py:172
+msgid "Orders"
+msgstr "Órdenes"
+#: apps/orders/models.py:40
+msgid "Fixed amount"
+msgstr "Cantidad fija"
+#: apps/orders/models.py:41
+msgid "Fixed percent"
+msgstr "Porcentaje fijo"
+#: apps/orders/models.py:44 apps/orders/models.py:191
+msgid "Promo code"
+msgstr "código promocional"
+#: apps/orders/models.py:45
+msgid "Promo codes"
+msgstr "Códigos promocionales"
+#: apps/orders/models.py:48
+msgid "Code"
+msgstr "Código"
+#: apps/orders/models.py:50
+msgid "Valid from"
+msgstr "Válido desde"
+#: apps/orders/models.py:51
+msgid "Valid to"
+msgstr "Válido para"
+#: apps/orders/models.py:54
+msgid "Min order amount"
+msgstr "Monto mínimo del pedido"
+#: apps/orders/models.py:58
+msgid "Variants"
+msgstr "Variantes"
+#: apps/orders/models.py:65
+msgid "Work for everything"
+msgstr "Trabaja por todo"
+#: apps/orders/models.py:68
+msgid "Discount type"
+msgstr "Tipo de descuento"
+#: apps/orders/models.py:74
+msgid "Discount percent"
+msgstr "Porcentaje de descuento"
+#: apps/orders/models.py:77
+msgid "Discount amount"
+msgstr "Monto del descuento"
+#: apps/orders/models.py:80
+msgid "Max uses"
+msgstr "Usos máximos"
+#: apps/orders/models.py:81
+msgid "Used count"
+msgstr "recuento usado"
+#: apps/orders/models.py:82
+msgid "Max uses per user"
+msgstr "Usos máximos por usuario"
+#: apps/orders/models.py:85
+msgid "Users used"
+msgstr "Usuarios utilizados"
+#: apps/orders/models.py:164
+msgid "Waiting payment"
+msgstr "Esperando pago"
+#: apps/orders/models.py:165
+msgid "Paid"
+msgstr "Pagado"
+#: apps/orders/models.py:167
+msgid "Expired"
+msgstr "Venció"
+#: apps/orders/models.py:168
+msgid "Failed (Needs review)"
+msgstr "Fallido (Necesita revisión)"
+#: apps/orders/models.py:179
+msgid "Payload URL"
+msgstr "URL de carga útil"
+#: apps/orders/models.py:189
+msgid "Amount USD"
+msgstr "Monto USD"
+#: apps/orders/models.py:193
+msgid "Paid at"
+msgstr "Pagado en"
+#: apps/orders/models.py:318
+msgid "Order item"
+msgstr "Artículo de pedido"
+#: apps/orders/models.py:319
+msgid "Order items"
+msgstr "Ordenar artículos"
+#: apps/orders/models.py:321
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+#: apps/orders/models.py:332
+msgid "Fixed price"
+msgstr "Precio fijo"
+#: apps/orders/models.py:334
+msgid "Is digital"
+msgstr "es digital"
+#: apps/payments/admin.py:46
+msgid "Crypto information"
+msgstr "Información criptográfica"
+#: apps/payments/admin.py:72
+msgid "Cancel Transaction"
+msgstr "Cancelar transacción"
+#: apps/payments/admin.py:82
+msgid "Transaction successfully cancelled."
+msgstr "Transacción cancelada exitosamente."
+#: apps/payments/admin.py:88
+msgid "Resolve Overpayment (Keep Target, Refund Rest)"
+msgstr "Resolver el sobrepago (mantener el objetivo, reembolsar el resto)"
+#: apps/payments/admin.py:102
+msgid "Overpayment successfully resolved. Transaction marked as PAID."
+msgstr "El sobrepago se resolvió con éxito. Transacción marcada como PAGADA."
+#: apps/payments/admin.py:105
+msgid "Error: "
+msgstr "Error:"
+#: apps/payments/admin.py:109
+msgid "Mark as Fully Refunded"
+msgstr "Marcar como totalmente reembolsado"
+#: apps/payments/admin.py:122
+msgid "Transaction successfully marked as REFUNDED."
+msgstr "Transacción marcada exitosamente como REEMBOLSADA."
+#: apps/payments/apps.py:8
+msgid "Payments"
+msgstr "Pagos"
+#: apps/payments/models.py:16
+msgid "Waiting for payment"
+msgstr "Esperando pago"
+#: apps/payments/models.py:17
+msgid "Successfully paid"
+msgstr "Pagado con éxito"
+#: apps/payments/models.py:18
+msgid "Paid wrong amount"
+msgstr "Pagó cantidad incorrecta"
+#: apps/payments/models.py:19
+msgid "Partially paid"
+msgstr "Parcialmente pagado"
+#: apps/payments/models.py:20
+msgid "Invoice expired"
+msgstr "Factura vencida"
+#: apps/payments/models.py:23
+msgid "Refunded"
+msgstr "Reintegrado"
+#: apps/payments/models.py:33
+msgid "Invoice ID"
+msgstr "ID de factura"
+#: apps/payments/models.py:35
+msgid "Payment currency"
+msgstr "Moneda de pago"
+#: apps/payments/models.py:36
+msgid "Network"
+msgstr "Red"
+#: apps/payments/models.py:43
+msgid "Target amount USD"
+msgstr "Monto objetivo USD"
+#: apps/payments/models.py:51
+msgid "Target crypto amount"
+msgstr "Cantidad criptográfica objetivo"
+#: apps/payments/models.py:58
+msgid "Current crypto amount"
+msgstr "Cantidad criptográfica actual"
+#: apps/payments/models.py:61
+msgid "Receiver address"
+msgstr "Dirección del destinatario"
+#: apps/payments/models.py:62
+msgid "Sender address"
+msgstr "Dirección del remitente"
+#: apps/payments/models.py:63
+msgid "Transaction hash"
+msgstr "hash de transacción"
+#: apps/payments/models.py:71
+msgid "Raw gateway response"
+msgstr "Respuesta de puerta de enlace sin procesar"
+#: apps/payments/models.py:75
+msgid "Payment transaction"
+msgstr "Transacción de pago"
+#: apps/payments/models.py:76
+msgid "Payment transactions"
+msgstr "Transacciones de pago"
+#: apps/support/admin.py:65
+msgid "Ticket Information"
+msgstr "Información de entradas"
+#: apps/support/admin.py:76
+msgid "Telegram Integration"
+msgstr "Integración de telegramas"
+#: apps/support/apps.py:8
+msgid "Support"
+msgstr "Apoyo"
+#: apps/support/models.py:17
+msgid "Open"
+msgstr "Abierto"
+#: apps/support/models.py:18
+msgid "In Progress"
+msgstr "En curso"
+#: apps/support/models.py:19
+msgid "Resolved"
+msgstr "Resuelto"
+#: apps/support/models.py:20
+msgid "Closed"
+msgstr "Cerrado"
+#: apps/support/models.py:23
+msgid "Bug Report"
+msgstr "Informe de error"
+#: apps/support/models.py:24
+msgid "Order Issue"
+msgstr "Problema de pedido"
+#: apps/support/models.py:25
+msgid "General Question"
+msgstr "Pregunta general"
+#: apps/support/models.py:50
+msgid "Forum Topic ID"
+msgstr "ID del tema del foro"
+#: apps/support/models.py:55
+msgid "Triage Message ID"
+msgstr "ID de mensaje de clasificación"
+#: apps/support/models.py:60
+msgid "First Copy Triage Message ID"
+msgstr "ID del mensaje de clasificación de la primera copia"
+#: apps/support/models.py:68 apps/support/models.py:137
+msgid "Ticket"
+msgstr "Boleto"
+#: apps/support/models.py:69
+msgid "Tickets"
+msgstr "Entradas"
+#: apps/support/models.py:141
+msgid "Sender is Admin"
+msgstr "El remitente es administrador"
+#: apps/support/models.py:147
+msgid "Telegram Message ID"
+msgstr "ID de mensaje de Telegram"
+#: apps/support/models.py:152
+msgid "Ticket Message"
+msgstr "Mensaje de ticket"
+#: apps/support/models.py:153
+msgid "Ticket Messages"
+msgstr "Mensajes de entradas"
+#: apps/telegram/apps.py:8
+msgid "Telegram"
+msgstr "Telegrama"
+#: apps/users/admin.py:99
+msgid "Telegram Information"
+msgstr "Información de telegrama"
+#: apps/users/admin.py:102
+msgid "Data automatically synchronized from Telegram. Strictly Read-Only."
+msgstr "Datos sincronizados automáticamente desde Telegram. Estrictamente de sólo lectura."
+#: apps/users/admin.py:106
+msgid "Access Control"
+msgstr "Control de acceso"
+#: apps/users/admin.py:109
+msgid "Manage user permissions and access to the admin panel."
+msgstr "Gestionar los permisos de usuario y el acceso al panel de administración."
+#: apps/users/admin.py:125
+msgid "Current Theme"
+msgstr "Tema actual"
+#: apps/users/apps.py:8 apps/users/models.py:217
+msgid "Users"
+msgstr "Usuarios"
+#: apps/users/models.py:45
+msgid "Light theme"
+msgstr "Tema ligero"
+#: apps/users/models.py:46
+msgid "Dark theme"
+msgstr "tema oscuro"
+#: apps/users/models.py:49
+msgid "None"
+msgstr "Ninguno"
+#: apps/users/models.py:50
+msgid "Lines"
+msgstr "Pauta"
+#: apps/users/models.py:51
+msgid "Shapes"
+msgstr "formas"
+#: apps/users/models.py:52
+msgid "Both"
+msgstr "Ambos"
+#: apps/users/models.py:57
+msgid "Preferred payment currency"
+msgstr "Moneda de pago preferida"
+#: apps/users/models.py:59
+msgid "Preferred network"
+msgstr "Red preferida"
+#: apps/users/models.py:61
+msgid "Particles style"
+msgstr "Estilo de partículas"
+#: apps/users/models.py:65
+msgid "Default theme"
+msgstr "Tema predeterminado"
+#: apps/users/models.py:68
+msgid "Custom theme"
+msgstr "Tema personalizado"
+#: apps/users/models.py:71
+msgid "Default language code"
+msgstr "Código de idioma predeterminado"
+#: apps/users/models.py:73
+msgid "Custom language code"
+msgstr "Código de idioma personalizado"
+#: apps/users/models.py:77 apps/users/models.py:78
+msgid "User settings"
+msgstr "Configuraciones de usuario"
+#: apps/users/models.py:126
+msgid "Is current"
+msgstr "es actual"
+#: apps/users/models.py:128
+msgid "Full name"
+msgstr "nombre completo"
+#: apps/users/models.py:129
+msgid "Email"
+msgstr "Correo electrónico"
+#: apps/users/models.py:130
+msgid "Phone"
+msgstr "Teléfono"
+#: apps/users/models.py:131
+msgid "Zip code"
+msgstr "Código postal"
+#: apps/users/models.py:132
+msgid "Address line"
+msgstr "Línea de dirección"
+#: apps/users/models.py:133
+msgid "Destination code"
+msgstr "Código de destino"
+#: apps/users/models.py:134
+msgid "Region code"
+msgstr "código de región"
+#: apps/users/models.py:137 apps/users/models.py:138
+msgid "User delivery data"
+msgstr "Datos de entrega del usuario"
+#: apps/users/models.py:194
+msgid "Telegram ID"
+msgstr "ID de telegrama"
+#: apps/users/models.py:196
+msgid "Telegram username"
+msgstr "nombre de usuario de telegrama"
+#: apps/users/models.py:197
+msgid "First name"
+msgstr "Nombre de pila"
+#: apps/users/models.py:198
+msgid "Last name"
+msgstr "Apellido"
+#: apps/users/models.py:204
+msgid "Staff status"
+msgstr "Estado del personal"
+#: apps/users/models.py:205
+msgid "Superuser status"
+msgstr "Estado de superusuario"
+#: config/settings.py:360
+msgid "Store management"
+msgstr "Gestión de tienda"
+#: config/settings.py:370
+msgid "Type to search"
+msgstr "Escribe para buscar"
+#: config/settings.py:371
+msgid "Search"
+msgstr "Buscar"
+#: config/settings.py:372
+msgid "Filters"
+msgstr "Filtros"
+#: config/settings.py:373
+msgid "Navigation"
+msgstr "Navegación"

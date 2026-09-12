@@ -1,0 +1,36 @@
+payments_settings:
+  default_payment_gateway: "nowpayments"
+  default_payment_lifetime_minutes: 20
+  fee_paid_by_buyer: True
+
+  providers:
+    nowpayments:
+      is_active: True
+      is_testnet: True
+      min_amount_usd: 2.0
+      supports_native_fee_delegation: True
+      buyer_fee_percent: 0.5
+      accepted_coins:
+        usdt: ["trc20", "erc20", "bsc", "sol"]
+        usdc: ["internal", "matic"]
+        btc: ["internal"]
+        eth: ["internal", "bsc"]
+        ltc: ["internal"]
+        trx: ["internal"]
+        ton: ["internal"]
+        bnb: ["mainnet", "bsc"]
+    cryptobot:
+      is_active: True
+      is_testnet: True
+      min_amount_usd: 0.1
+      supports_native_fee_delegation: False
+      buyer_fee_percent: 3.0
+      accepted_coins:
+        usdt: ["internal"]
+        ton: ["internal"]
+        btc: ["internal"]
+        eth: ["internal"]
+        ltc: ["internal"]
+        bnb: ["internal"]
+        trx: ["internal"]
+        usdc: ["internal"]

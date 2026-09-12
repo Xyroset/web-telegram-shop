@@ -1,0 +1,114 @@
+name: Web Telegram Shop
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_WEB_TELEGRAM_SHOP
+    hostname: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    logging:
+      driver: "none"
+
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    container_name: pgbouncer_WEB_TELEGRAM_SHOP
+    hostname: pgbouncer
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - DB_PORT=5432
+      - LISTEN_PORT=5432
+      - MAX_CLIENT_CONN=200
+      - DEFAULT_POOL_SIZE=40
+      - MIN_POOL_SIZE=10
+      - POOL_MODE=transaction
+      - AUTH_TYPE=scram-sha-256
+    logging:
+      driver: "none"
+
+  worker:
+    build: ./backend
+    container_name: worker_WEB_TELEGRAM_SHOP
+    hostname: worker
+    volumes:
+      - ./backend:/app
+      - ./config:/app/shop_config:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - REDIS=redis
+      - POSTGRES_HOST=pgbouncer
+      - POSTGRES_PORT=5432
+
+  celery_beat:
+    build: ./backend
+    container_name: celery_beat_WEB_TELEGRAM_SHOP
+    volumes:
+      - ./backend:/app
+      - ./config:/app/shop_config:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - REDIS=redis
+      - POSTGRES_HOST=pgbouncer
+      - POSTGRES_PORT=5432
+
+  backend:
+    build: ./backend
+    container_name: backend_WEB_TELEGRAM_SHOP
+    volumes:
+      - ./backend:/app
+      - ./config:/app/shop_config
+    depends_on:
+      redis:
+        condition: service_healthy
+      pgbouncer:
+        condition: service_started
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((''127.0.0.1'', 8000))"',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    env_file:
+      - .env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - REDIS=redis
+      - TZ=${TZ:-UTC}
+      - POSTGRES_HOST=pgbouncer
+      - POSTGRES_PORT=5432
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_WEB_TELEGRAM_SHOP
+    depends_on:
+      - backend
+    environment:
+      - TZ=${TZ:-UTC}
+
+volumes:
+  redis_data:

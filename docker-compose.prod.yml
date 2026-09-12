@@ -1,0 +1,99 @@
+services:
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    container_name: pgbouncer_WEB_TELEGRAM_SHOP
+    hostname: pgbouncer
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_HOST=${POSTGRES_HOST}
+      - SERVER_TLS_SSLMODE=require
+
+  worker:
+    command: celery -A config.celery.app worker --loglevel=warning
+    restart: always
+
+  celery_beat:
+    command: celery -A config.celery.app beat --loglevel=warning
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        - DEBUG=false
+        - VITE_API_URL=https://${BACKEND_VIRTUAL_HOST}
+    restart: always
+    environment:
+      - VIRTUAL_HOST=${FRONTEND_VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${FRONTEND_LETSENCRYPT_HOST}
+      - VIRTUAL_PORT=5173
+    depends_on:
+      - backend
+    volumes:
+      - ./infra/nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./infra/nginx/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+      - ./infra/nginx/html:/usr/share/nginx/custom_html:ro
+
+  backend:
+    command: sh -c "python manage.py collectstatic --noinput &&
+      python manage.py migrate &&
+      python manage.py setup_telegram_webhook &&
+      python manage.py reload_shop_config &&
+      daphne -b 0.0.0.0 -p 8000 config.asgi:application"
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((''127.0.0.1'', 8000))"',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    environment:
+      - VIRTUAL_HOST=${BACKEND_VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${BACKEND_LETSENCRYPT_HOST}
+      - VIRTUAL_PORT=8000
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./infra/nginx/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: acme-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=${DEFAULT_EMAIL}
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:

@@ -1,0 +1,2747 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Web telergram shop API",
+		"version": "1.0.0",
+		"description": "Telegram Mini App API with cryptocurrency payments"
+	},
+	"paths": {
+		"/api/v1/basket/": {
+			"get": {
+				"operationId": "basket_list",
+				"description": "Handles retrieval of the user's entire basket and creation/updating of basket items.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Uses `BasketRepository` to fetch the user's basket items for listing.\n- **POST**: Delegates item creation or quantity updates to `BasketCreateUpdateItemCase`.",
+				"summary": "Receive the user's entire basket",
+				"tags": ["Basket"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/BasketUpdatePageResponse"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"post": {
+				"operationId": "basket_create",
+				"description": "Handles retrieval of the user's entire basket and creation/updating of basket items.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Uses `BasketRepository` to fetch the user's basket items for listing.\n- **POST**: Delegates item creation or quantity updates to `BasketCreateUpdateItemCase`.",
+				"summary": "Update/Create a basket item",
+				"tags": ["Basket"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BasketShopUpdateRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/BasketShopUpdateRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/BasketShopUpdateRequestRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/basket/{variant_id}/": {
+			"delete": {
+				"operationId": "basket_destroy",
+				"description": "Handles deletion of a specific basket item.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **DELETE**: Delegates item deletion to `BasketDeleteItemCase` using variant_id.",
+				"summary": "Delete a basket item",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "variant_id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Basket"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/basket/calculate/": {
+			"get": {
+				"operationId": "basket_calculate_retrieve",
+				"description": "Handles calculating the total price of the user's basket.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Computes basket totals including promo code discounts using `BasketCalculateCase`.",
+				"summary": "Receive total price of the user's entire shopping basket",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "promocode",
+						"schema": {
+							"type": "string"
+						},
+						"description": "Optional promotional code to apply a discount"
+					}
+				],
+				"tags": ["Basket"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasketCalculatePriceResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/categories/": {
+			"get": {
+				"operationId": "catalog_categories_list",
+				"description": "API View for fetching categories.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates to `ProductRepository`.",
+				"summary": "Get all categories",
+				"tags": ["Catalog"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Category"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/favorites/{product_id}/": {
+			"post": {
+				"operationId": "catalog_favorites_create",
+				"description": "API View for managing user's favorite products.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **POST**: Delegates creation to `CreateFavoriteItemCase`.\n- **DELETE**: Delegates deletion to `DeleteFavoriteItemCase`.",
+				"summary": "Add a product in user favorites",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "product_id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Favorite"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			},
+			"delete": {
+				"operationId": "catalog_favorites_destroy",
+				"description": "API View for managing user's favorite products.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **POST**: Delegates creation to `CreateFavoriteItemCase`.\n- **DELETE**: Delegates deletion to `DeleteFavoriteItemCase`.",
+				"summary": "Delete a product in user favorites",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "product_id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Favorite"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/products/": {
+			"get": {
+				"operationId": "catalog_products_list",
+				"description": "API View for fetching the product catalog.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates data fetching to `ProductRepository` and uses `FavoriteItemRepository` for serializer context.",
+				"summary": "Get product catalog",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "category",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "in_stock",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "is_favorite",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "is_new",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "is_promotion",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"name": "limit",
+						"required": false,
+						"in": "query",
+						"description": "Number of results to return per page.",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "max_price",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "min_discount",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "min_price",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "min_rating",
+						"schema": {
+							"type": "number",
+							"format": "double"
+						}
+					},
+					{
+						"name": "offset",
+						"required": false,
+						"in": "query",
+						"description": "The initial index from which to return the results.",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "ordering",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"enum": ["-date", "-name", "-price", "date", "name", "price"]
+							}
+						},
+						"description": "Ordering\n\n* `date` - Date\n* `-date` - Date (descending)\n* `price` - Price\n* `-price` - Price (descending)\n* `name` - Sort alphabetically\n* `-name` - Sort alphabetically (descending)",
+						"explode": false,
+						"style": "form"
+					},
+					{
+						"in": "query",
+						"name": "product_type",
+						"schema": {
+							"type": "string",
+							"enum": ["DIGITAL", "PHYSICAL"]
+						},
+						"description": "* `PHYSICAL` - Physical\n* `DIGITAL` - Digital"
+					},
+					{
+						"in": "query",
+						"name": "search",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "strict_search",
+						"schema": {
+							"type": "boolean"
+						},
+						"description": "If true, disables Trigram fuzzy matching and uses exact/partial substring search only."
+					},
+					{
+						"in": "query",
+						"name": "tag",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"tags": ["Catalog"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginatedShopProductListResponseList"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/products/suggestions/": {
+			"get": {
+				"operationId": "catalog_products_suggestions_list",
+				"description": "API View for fetching fast autocomplete search suggestions.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates to `ProductRepository`'s hybrid search logic.",
+				"summary": "Get search autocomplete suggestions",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer"
+						},
+						"description": "Maximum number of suggestions to return (default: 5)."
+					},
+					{
+						"in": "query",
+						"name": "search",
+						"schema": {
+							"type": "string"
+						},
+						"description": "Search term for autocomplete suggestions.",
+						"required": true
+					}
+				],
+				"tags": ["Catalog"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ProductSuggestionResponse"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/products/variants/{product_id}/": {
+			"get": {
+				"operationId": "catalog_products_variants_list",
+				"description": "API View for fetching product variants.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates to `ProductRepository` to fetch variants and `BasketRepository` to enrich context.",
+				"summary": "Get all variants for a specific product",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "product_id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Catalog"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ProductVariantDetail"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/reviews/": {
+			"post": {
+				"operationId": "catalog_reviews_create",
+				"description": "API View for creating a product review.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **POST**: Validates multipart data via serializer, delegates business rules to `CreateReviewCase`.",
+				"summary": "Create a new review",
+				"tags": ["Review"],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/ReviewCreateRequestRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/reviews/{id}/": {
+			"put": {
+				"operationId": "catalog_reviews_update",
+				"description": "API View for updating or deleting a product review.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **PUT**: Validates payload, delegates to `UpdateReviewCase`.\n- **DELETE**: Delegates to `DeleteReviewCase`.",
+				"summary": "Update an old review",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Review"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ReviewUpdateRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/ReviewUpdateRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/ReviewUpdateRequestRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			},
+			"delete": {
+				"operationId": "catalog_reviews_destroy",
+				"description": "API View for updating or deleting a product review.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **PUT**: Validates payload, delegates to `UpdateReviewCase`.\n- **DELETE**: Delegates to `DeleteReviewCase`.",
+				"summary": "Delete a review",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Review"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/reviews/{product_id}/": {
+			"get": {
+				"operationId": "catalog_reviews_list",
+				"description": "API View for fetching product reviews.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates query construction to `GetReviewsCase`.",
+				"summary": "Get reviews",
+				"parameters": [
+					{
+						"name": "c",
+						"required": false,
+						"in": "query",
+						"description": "The pagination cursor value.",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "product_id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Review"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginatedReviewList"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/catalog/tags/": {
+			"get": {
+				"operationId": "catalog_tags_list",
+				"description": "API View for fetching tags.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates to `ProductRepository`.",
+				"summary": "Get all tags",
+				"tags": ["Catalog"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Tag"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/core/config/init/": {
+			"get": {
+				"operationId": "core_config_init_retrieve",
+				"description": "Provides initial configuration payload for the WebApp.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Delegates config generation to `GetWebAppInitConfigCase`.",
+				"summary": "Get init data for WebApp",
+				"tags": ["Config"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetWebAppInitConfigResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/delivery/{order_id}": {
+			"get": {
+				"operationId": "delivery_retrieve",
+				"description": "API View to retrieve delivery details for a specific order.\n\nPermissions:\n- Requires an authenticated user.\n- User can only access delivery data associated with their own order.\n\nDelegation:\n- GET: Fetches delivery details directly via `DeliveryRepository` using `order_id` and `user`.",
+				"summary": "Get delivery data on order id",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "order_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Delivery"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeliveryDataResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/delivery/estimate/": {
+			"get": {
+				"operationId": "delivery_estimate_retrieve",
+				"description": "API View to retrieve estimated delivery costs and gamification thresholds.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- GET: Validates query parameters using `DeliveryEstimateRequestSerializer`,\n  delegates calculation to `CalculateDeliveryEstimateCase`,\n  and serializes the result with `DeliveryEstimateResponseSerializer`.",
+				"summary": "Calculate Delivery Estimate",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "destination_code",
+						"schema": {
+							"type": "string",
+							"maxLength": 10
+						}
+					},
+					{
+						"in": "query",
+						"name": "region_code",
+						"schema": {
+							"type": "string",
+							"maxLength": 10
+						}
+					}
+				],
+				"tags": ["Delivery"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeliveryEstimateResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/orders/": {
+			"get": {
+				"operationId": "orders_list",
+				"description": "Handles listing of user's orders and creation of new orders.\n\nPermissions:\n- Requires an authenticated user.\n- User can only access or modify their own orders (Ownership check).\n\nDelegation:\n- **GET**: Uses `OrderRepository` to fetch the user's order queryset for pagination.\n- **POST**: Delegates order creation, product reservation, and invoice generation to `CreateOrderCase`",
+				"summary": "Receive user's entire list orders",
+				"parameters": [
+					{
+						"name": "c",
+						"required": false,
+						"in": "query",
+						"description": "The pagination cursor value.",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"tags": ["Order"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginatedOrderResponseList"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"post": {
+				"operationId": "orders_create",
+				"description": "Handles listing of user's orders and creation of new orders.\n\nPermissions:\n- Requires an authenticated user.\n- User can only access or modify their own orders (Ownership check).\n\nDelegation:\n- **GET**: Uses `OrderRepository` to fetch the user's order queryset for pagination.\n- **POST**: Delegates order creation, product reservation, and invoice generation to `CreateOrderCase`",
+				"summary": "Create a new user order from user basket",
+				"tags": ["Order"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrderCreateRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/OrderCreateRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/OrderCreateRequestRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OrderCreateResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/orders/{order_id}/": {
+			"get": {
+				"operationId": "orders_retrieve",
+				"description": "Handles retrieval and cancellation of a specific order.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Fetches a single order directly via `OrderRepository`\n- **PATCH**: Delegates the cancellation process (and side effects) to `CancelOrderCase`.",
+				"summary": "Get an order",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "order_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Order"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OrderResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"put": {
+				"operationId": "orders_update",
+				"description": "Handles retrieval and cancellation of a specific order.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **GET**: Fetches a single order directly via `OrderRepository`\n- **PATCH**: Delegates the cancellation process (and side effects) to `CancelOrderCase`.",
+				"summary": "Cancel an order",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "order_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Order"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/payments/": {
+			"post": {
+				"operationId": "payments_create",
+				"description": "Handles payment transaction creation and invoice generation with external gateways.\n\nPermissions:\n- Requires an authenticated user.\n\nDelegation:\n- **POST**: Validates input data via `CreateInvoiceRequestSerializer`, resolves gateway,\n  and delegates orchestrations to `CreateInvoiceCase`.",
+				"summary": "Create a new payment invoice",
+				"tags": ["Payment"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceRequestRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionCreateResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/payments/{transaction_id}/": {
+			"get": {
+				"operationId": "payments_retrieve",
+				"description": "Handles retrieving details and cancellation of a single payment transaction.\n\nPermissions:\n- Requires an authenticated user.\n- User can only view or cancel transactions associated with their own orders.\n\nDelegation:\n- **GET**: Uses `PaymentTransactionRepository` to fetch single transaction by ID and user ownership.\n- **PUT**: Delegates transaction cancellation and task revocation to `CancelTransactionCase`.",
+				"summary": "Get a transaction",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "transaction_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Payment"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"put": {
+				"operationId": "payments_update",
+				"description": "Handles retrieving details and cancellation of a single payment transaction.\n\nPermissions:\n- Requires an authenticated user.\n- User can only view or cancel transactions associated with their own orders.\n\nDelegation:\n- **GET**: Uses `PaymentTransactionRepository` to fetch single transaction by ID and user ownership.\n- **PUT**: Delegates transaction cancellation and task revocation to `CancelTransactionCase`.",
+				"summary": "Cancel user transaction",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "transaction_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Payment"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/payments/cryptobot/": {
+			"post": {
+				"operationId": "payments_cryptobot_create",
+				"description": "Handles incoming payment status updates from the CryptoBot (Crypto Pay) webhook.\n\nPermissions:\n- Allows any user (AllowAny). Signature validation is handled internally by the gateway.\n\nDelegation:\n- **POST**: Delegates webhook signature verification, state mutation, and side-effects to `ProcessWebhookCase`.",
+				"summary": "Webhook for gateway CryptoBot",
+				"tags": ["Webhook", "Payment Providers"],
+				"security": [{}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/payments/nowpayments/": {
+			"post": {
+				"operationId": "payments_nowpayments_create",
+				"description": "Handles incoming payment status updates from the NOWPayments webhook.\n\nPermissions:\n- Allows any user (AllowAny). Signature validation is handled internally by the gateway.\n\nDelegation:\n- **POST**: Delegates webhook signature verification, state mutation, and side-effects to `ProcessWebhookCase`.",
+				"summary": "Webhook for gateway nowpayments",
+				"tags": ["Webhook", "Payment Providers"],
+				"security": [{}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/payments/order/{order_id}/": {
+			"get": {
+				"operationId": "payments_order_list",
+				"description": "Handles retrieval of paginated payment transactions for a specific user's order.\n\nPermissions:\n- Requires an authenticated user.\n- User can only view transactions associated with their own orders.\n\nDelegation:\n- **GET**: Uses `PaymentTransactionRepository` to fetch filtered QuerySet for pagination.",
+				"summary": "Receive user's entire list transactions",
+				"parameters": [
+					{
+						"name": "c",
+						"required": false,
+						"in": "query",
+						"description": "The pagination cursor value.",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "order_id",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"required": true
+					}
+				],
+				"tags": ["Payment"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginatedTransactionResponseList"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/support/": {
+			"post": {
+				"operationId": "support_create",
+				"description": "Handles customer support ticket creation.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **POST**: Validates input payload and delegates ticket creation and admin notification to `CreateTicketCase`.",
+				"summary": "Create support ticket for admin",
+				"tags": ["Support"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTicketRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTicketRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTicketRequestRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "No response body"
+					}
+				}
+			}
+		},
+		"/api/v1/users/auth/dev/": {
+			"post": {
+				"operationId": "users_auth_dev_create",
+				"description": "Creates or logs in a user using only tg_id. Disabled in production.",
+				"summary": "DEV ONLY: Login without Telegram auth",
+				"tags": ["Auth"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DevAuthRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/DevAuthRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/DevAuthRequestRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					},
+					{}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TelegramAuthResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/users/auth/telegram/": {
+			"post": {
+				"operationId": "users_auth_telegram_create",
+				"description": "API View for user authorization via Telegram.\n\nPermissions:\n- Allows any user (AllowAny). Payload authenticity is verified via Telegram HMAC.\n\nDelegation:\n- **POST**: Validates Telegram init data via `ValidateInitTelegramDataCase`\n  and delegates authentication/creation to `TelegramAuthUseCase`.",
+				"summary": "User authorization via Telegram",
+				"tags": ["Auth"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TelegramAuthRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/TelegramAuthRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/TelegramAuthRequestRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					},
+					{}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TelegramAuthResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/": {
+			"get": {
+				"operationId": "users_me_retrieve",
+				"description": "API View for retrieving the current authenticated user's profile.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **GET**: Returns the serialized profile of `request.user`.",
+				"summary": "Get current user data",
+				"tags": ["User"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetUserDataResponse"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/delivery_data/": {
+			"get": {
+				"operationId": "users_me_delivery_data_list",
+				"description": "API View for managing user delivery records collection.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **GET**: Retrieves list of delivery addresses via `UserDeliveryDataRepository`.\n- **POST**: Validates input data and delegates creation to `CreateUserDeliveryDataCase`.",
+				"summary": "Get user's delivery data",
+				"tags": ["User Delivery Data"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/UserDeliveryDataResponse"
+									}
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"post": {
+				"operationId": "users_me_delivery_data_create",
+				"description": "API View for managing user delivery records collection.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **GET**: Retrieves list of delivery addresses via `UserDeliveryDataRepository`.\n- **POST**: Validates input data and delegates creation to `CreateUserDeliveryDataCase`.",
+				"summary": "Create a new user delivery data",
+				"tags": ["User Delivery Data"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Delivery data created successfully."
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/delivery_data/details/{id}/": {
+			"put": {
+				"operationId": "users_me_delivery_data_details_update",
+				"description": "API View for updating and deleting a specific delivery data entry.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **PUT**: Validates input data and delegates update to `UpdateUserDeliveryDataCase`.\n- **DELETE**: Delegates deletion to `DeleteUserDeliveryDataCase`.",
+				"summary": "Update one item user delivery data",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["User Delivery Data"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDeliveryDataRequestRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Delivery data updated successfully."
+					}
+				}
+			},
+			"delete": {
+				"operationId": "users_me_delivery_data_details_destroy",
+				"description": "API View for updating and deleting a specific delivery data entry.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **PUT**: Validates input data and delegates update to `UpdateUserDeliveryDataCase`.\n- **DELETE**: Delegates deletion to `DeleteUserDeliveryDataCase`.",
+				"summary": "Delete one item user delivery data",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["User Delivery Data"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Delivery data deleted successfully."
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/delivery_data/management/{id}/": {
+			"patch": {
+				"operationId": "users_me_delivery_data_management_partial_update",
+				"description": "API View for toggling the active status of a user's delivery address.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **PATCH**: Delegates marking the record as current to `SetCurrentUserDeliveryDataCase`.\n- **DELETE**: Delegates unsetting the record as current to `UnSetCurrentUserDeliveryDataCase`.",
+				"summary": "Set is current one item user delivery data",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["User Delivery Data"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Delivery data marked as current."
+					}
+				}
+			},
+			"delete": {
+				"operationId": "users_me_delivery_data_management_destroy",
+				"description": "API View for toggling the active status of a user's delivery address.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **PATCH**: Delegates marking the record as current to `SetCurrentUserDeliveryDataCase`.\n- **DELETE**: Delegates unsetting the record as current to `UnSetCurrentUserDeliveryDataCase`.",
+				"summary": "Unset is current one item user delivery data",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"schema": {
+							"type": "integer"
+						},
+						"required": true
+					}
+				],
+				"tags": ["User Delivery Data"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Delivery data unmarked as current."
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/settings/": {
+			"get": {
+				"operationId": "users_me_settings_retrieve",
+				"description": "API View for retrieving and updating user application settings.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **GET**: Fetches settings via `UserSettingsDataRepository` and serializes them.\n- **PUT**: Validates payload via `UserSettingsSerializer` and delegates update to `UpdateUserSettingsCase`.",
+				"summary": "Get current user settings",
+				"tags": ["User Settings"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserSettings"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			},
+			"put": {
+				"operationId": "users_me_settings_update",
+				"description": "API View for retrieving and updating user application settings.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **GET**: Fetches settings via `UserSettingsDataRepository` and serializes them.\n- **PUT**: Validates payload via `UserSettingsSerializer` and delegates update to `UpdateUserSettingsCase`.",
+				"summary": "Update user settings",
+				"tags": ["User Settings"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserSettingsRequest"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/UserSettingsRequest"
+							}
+						},
+						"multipart/form-data": {
+							"schema": {
+								"$ref": "#/components/schemas/UserSettingsRequest"
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Settings updated successfully."
+					}
+				}
+			}
+		},
+		"/api/v1/users/me/settings/reset_to_default/": {
+			"put": {
+				"operationId": "users_me_settings_reset_to_default_update",
+				"description": "API View for resetting user settings to system defaults.\n\nPermissions:\n- Requires an authenticated user (IsAuthenticated).\n\nDelegation:\n- **PUT**: Loads defaults from `shop_config` and delegates updates to `UpdateUserSettingsCase`.",
+				"summary": "Reset user settings to default state",
+				"tags": ["User Settings"],
+				"security": [
+					{
+						"jwtAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Settings reset to defaults successfully."
+					}
+				}
+			}
+		},
+		"/api/v1/users/token/refresh/": {
+			"post": {
+				"operationId": "users_token_refresh_create",
+				"description": "API View for refreshing JWT access tokens.\n\nPermissions:\n- Allows any user (AllowAny).\n\nDelegation:\n- **POST**: Validates the HttpOnly refresh cookie via `CookieTokenRefreshSerializer` and issues a new access token.",
+				"summary": "Update access token via HttpOnly Cookie",
+				"tags": ["Auth"],
+				"security": [
+					{
+						"jwtAuth": []
+					},
+					{}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CookieTokenRefresh"
+								}
+							}
+						},
+						"description": ""
+					}
+				}
+			}
+		},
+		"/api/v1/webhook/telegram/": {
+			"post": {
+				"operationId": "webhook_telegram_create",
+				"description": "Endpoint for receiving inbound updates from Telegram.\n\nPermissions:\n- Allows any client (AllowAny).\nRequest authenticity is verified securely via the X-Telegram-Bot-Api-Secret-Token header.\n\nDelegation:\n- **POST**: Validates the webhook secret token and delegates the payload to `ProcessTelegramWebhookCase`.",
+				"summary": "Webhook for Telegram API communication",
+				"tags": ["Webhook", "Telegram"],
+				"security": [{}],
+				"responses": {
+					"200": {
+						"description": "No response body"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"BaseResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				}
+			},
+			"BasketCalculatePriceResponse": {
+				"type": "object",
+				"properties": {
+					"base_price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"total_price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"total_weight_kg": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"discount_value": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"promocode_type": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 20
+					},
+					"valid_promocode": {
+						"type": "boolean",
+						"default": false
+					}
+				},
+				"required": ["total_price", "total_weight_kg"]
+			},
+			"BasketShopUpdateRequestRequest": {
+				"type": "object",
+				"properties": {
+					"variant_id": {
+						"type": "integer"
+					},
+					"quantity": {
+						"type": "integer",
+						"minimum": 1
+					}
+				},
+				"required": ["quantity", "variant_id"]
+			},
+			"BasketUpdatePageResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"quantity": {
+						"type": "integer",
+						"maximum": 2147483647,
+						"minimum": 0
+					},
+					"variant": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ShortVariantProduct"
+							}
+						],
+						"readOnly": true
+					}
+				},
+				"required": ["id", "variant"]
+			},
+			"Category": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"name": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string",
+						"maxLength": 50,
+						"pattern": "^[-a-zA-Z0-9_]+$"
+					}
+				},
+				"required": ["id", "name", "slug"]
+			},
+			"CookieTokenRefresh": {
+				"type": "object",
+				"properties": {
+					"access_token": {
+						"type": "string",
+						"readOnly": true
+					}
+				},
+				"required": ["access_token"]
+			},
+			"CreateInvoiceRequestRequest": {
+				"type": "object",
+				"properties": {
+					"order_id": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"currency": {
+						"type": "string",
+						"minLength": 1
+					},
+					"network": {
+						"type": "string"
+					},
+					"provider_name": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": ["order_id"]
+			},
+			"CreateTicketRequestRequest": {
+				"type": "object",
+				"properties": {
+					"category": {
+						"type": "string",
+						"minLength": 1
+					},
+					"message_text": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": ["category", "message_text"]
+			},
+			"DeliveryAddressRequest": {
+				"type": "object",
+				"properties": {
+					"full_name": {
+						"type": "string",
+						"minLength": 1,
+						"default": "-",
+						"maxLength": 255
+					},
+					"email": {
+						"type": "string",
+						"minLength": 1,
+						"default": "-",
+						"maxLength": 255
+					},
+					"phone": {
+						"type": "string",
+						"minLength": 1,
+						"default": "-",
+						"maxLength": 20
+					},
+					"zip_code": {
+						"type": "string",
+						"minLength": 1,
+						"default": "-",
+						"maxLength": 20
+					},
+					"address_line": {
+						"type": "string",
+						"minLength": 1,
+						"default": "-",
+						"maxLength": 255
+					},
+					"destination_code": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 10
+					},
+					"region_code": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 10
+					}
+				}
+			},
+			"DeliveryDataResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"state": {
+						"$ref": "#/components/schemas/DeliveryDataResponseStateEnum"
+					},
+					"order": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"provider_code": {
+						"type": "string",
+						"maxLength": 50
+					},
+					"tracking_number": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 100
+					},
+					"cost": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"delivery_data": {}
+				},
+				"required": ["cost", "delivery_data", "id", "order"]
+			},
+			"DeliveryDataResponseStateEnum": {
+				"enum": [
+					"PENDING",
+					"PROCESSING",
+					"SHIPPED",
+					"DELIVERED",
+					"FAILED",
+					"CANCELLED",
+					"RETURNED"
+				],
+				"type": "string",
+				"description": "* `PENDING` - Pending\n* `PROCESSING` - Processing\n* `SHIPPED` - Shipped\n* `DELIVERED` - Delivered\n* `FAILED` - Failed\n* `CANCELLED` - Cancelled\n* `RETURNED` - Returned"
+			},
+			"DeliveryEstimateResponse": {
+				"type": "object",
+				"properties": {
+					"cost": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"is_free": {
+						"type": "boolean"
+					},
+					"amount_left_for_free": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"is_free_available": {
+						"type": "boolean"
+					}
+				},
+				"required": ["amount_left_for_free", "cost", "is_free", "is_free_available"]
+			},
+			"DevAuthRequestRequest": {
+				"type": "object",
+				"properties": {
+					"tg_id": {
+						"type": "integer",
+						"default": 1,
+						"description": "Test user Telegram ID"
+					}
+				}
+			},
+			"DiscountTypeEnum": {
+				"enum": ["amount", "percent"],
+				"type": "string",
+				"description": "* `amount` - Fixed amount\n* `percent` - Fixed percent"
+			},
+			"GetUserDataResponse": {
+				"type": "object",
+				"properties": {
+					"tg_id": {
+						"type": "integer",
+						"maximum": 9223372036854775807,
+						"minimum": -9223372036854775808,
+						"format": "int64",
+						"title": "Telegram ID"
+					},
+					"tg_username": {
+						"type": "string",
+						"nullable": true,
+						"title": "Telegram username",
+						"maxLength": 150
+					},
+					"first_name": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 150
+					},
+					"last_name": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 150
+					},
+					"photo": {
+						"type": "string",
+						"format": "uri",
+						"nullable": true
+					}
+				},
+				"required": ["tg_id"]
+			},
+			"GetWebAppInitConfigResponse": {
+				"type": "object",
+				"properties": {
+					"available_languages": {},
+					"current_language": {
+						"type": "string"
+					},
+					"translations": {},
+					"particles": {},
+					"background": {},
+					"payments_visual": {},
+					"zone_names_extra": {},
+					"footer": {}
+				},
+				"required": [
+					"available_languages",
+					"background",
+					"current_language",
+					"footer",
+					"particles",
+					"payments_visual",
+					"translations",
+					"zone_names_extra"
+				]
+			},
+			"OrderCreateRequestRequest": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"delivery_data": {
+						"$ref": "#/components/schemas/DeliveryAddressRequest"
+					}
+				}
+			},
+			"OrderCreateResponse": {
+				"type": "object",
+				"properties": {
+					"order_id": {
+						"type": "string"
+					}
+				},
+				"required": ["order_id"]
+			},
+			"OrderItem": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"variant": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ShortVariantProduct"
+							}
+						],
+						"readOnly": true
+					},
+					"quantity": {
+						"type": "integer",
+						"maximum": 2147483647,
+						"minimum": 0
+					},
+					"fixed_price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					}
+				},
+				"required": ["fixed_price", "id", "variant"]
+			},
+			"OrderResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"amount_usd": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"state": {
+						"$ref": "#/components/schemas/OrderResponseStateEnum"
+					},
+					"paid_at": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time",
+						"readOnly": true
+					},
+					"promocode": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/PromoCode"
+							}
+						],
+						"readOnly": true
+					},
+					"payload_url": {
+						"type": "string",
+						"format": "uri",
+						"nullable": true,
+						"maxLength": 200
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OrderItem"
+						},
+						"readOnly": true
+					}
+				},
+				"required": ["amount_usd", "created_at", "id", "items", "promocode"]
+			},
+			"OrderResponseStateEnum": {
+				"enum": ["pending", "paid", "cancelled", "expired", "failed"],
+				"type": "string",
+				"description": "* `pending` - Waiting payment\n* `paid` - Paid\n* `cancelled` - Cancelled\n* `expired` - Expired\n* `failed` - Failed (Needs review)"
+			},
+			"PaginatedOrderResponseList": {
+				"type": "object",
+				"required": ["results"],
+				"properties": {
+					"next": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cD00ODY%3D\""
+					},
+					"previous": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cj0xJnA9NDg3"
+					},
+					"results": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OrderResponse"
+						}
+					}
+				}
+			},
+			"PaginatedReviewList": {
+				"type": "object",
+				"required": ["results"],
+				"properties": {
+					"next": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cD00ODY%3D\""
+					},
+					"previous": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cj0xJnA9NDg3"
+					},
+					"results": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Review"
+						}
+					}
+				}
+			},
+			"PaginatedShopProductListResponseList": {
+				"type": "object",
+				"required": ["count", "results"],
+				"properties": {
+					"count": {
+						"type": "integer",
+						"example": 123
+					},
+					"next": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?offset=400&limit=100"
+					},
+					"previous": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?offset=200&limit=100"
+					},
+					"results": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ShopProductListResponse"
+						}
+					}
+				}
+			},
+			"PaginatedTransactionResponseList": {
+				"type": "object",
+				"required": ["results"],
+				"properties": {
+					"next": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cD00ODY%3D\""
+					},
+					"previous": {
+						"type": "string",
+						"nullable": true,
+						"format": "uri",
+						"example": "http://api.example.org/accounts/?c=cj0xJnA9NDg3"
+					},
+					"results": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TransactionResponse"
+						}
+					}
+				}
+			},
+			"Photo": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"image": {
+						"type": "string",
+						"format": "uri"
+					},
+					"ordering": {
+						"type": "integer",
+						"maximum": 2147483647,
+						"minimum": 0
+					}
+				},
+				"required": ["id", "image"]
+			},
+			"ProductSuggestionResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"name": {
+						"type": "string",
+						"maxLength": 150
+					}
+				},
+				"required": ["id", "name"]
+			},
+			"ProductVariantDetail": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"badge": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 50
+					},
+					"price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"old_price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"nullable": true
+					},
+					"title": {
+						"type": "string",
+						"maxLength": 150
+					},
+					"image": {
+						"type": "string",
+						"format": "uri",
+						"nullable": true
+					},
+					"stock_status": {
+						"type": "string",
+						"readOnly": true
+					},
+					"is_new": {
+						"type": "boolean",
+						"readOnly": true
+					},
+					"is_promotion": {
+						"type": "boolean",
+						"readOnly": true
+					},
+					"promotion_discount": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"basket_quantity": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"specific_description": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"tags": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Tag"
+						},
+						"readOnly": true
+					},
+					"weight_kg": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"title": "Weight (kg)"
+					},
+					"length_cm": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"title": "Length (cm)"
+					},
+					"width_cm": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"title": "Width (cm)"
+					},
+					"height_cm": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"title": "Height (cm)"
+					},
+					"volumetric_weight_kg": {
+						"type": "number",
+						"format": "double",
+						"readOnly": true
+					},
+					"metadata": {
+						"nullable": true,
+						"description": "Universal field"
+					}
+				},
+				"required": [
+					"basket_quantity",
+					"id",
+					"is_new",
+					"is_promotion",
+					"price",
+					"promotion_discount",
+					"stock_status",
+					"tags",
+					"title",
+					"volumetric_weight_kg"
+				]
+			},
+			"PromoCode": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"code": {
+						"type": "string",
+						"maxLength": 20
+					},
+					"discount_type": {
+						"$ref": "#/components/schemas/DiscountTypeEnum"
+					},
+					"discount_percent": {
+						"type": "integer",
+						"maximum": 100,
+						"minimum": 1,
+						"nullable": true
+					},
+					"discount_amount": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"nullable": true
+					}
+				},
+				"required": ["code", "id"]
+			},
+			"Review": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"user": {
+						"type": "object",
+						"additionalProperties": {},
+						"readOnly": true
+					},
+					"is_author": {
+						"type": "boolean",
+						"readOnly": true
+					},
+					"rating": {
+						"type": "integer",
+						"maximum": 5,
+						"minimum": 1
+					},
+					"text": {
+						"type": "string",
+						"nullable": true
+					},
+					"photos": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReviewPhoto"
+						},
+						"readOnly": true
+					},
+					"admin_reply_text": {
+						"type": "string",
+						"nullable": true
+					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time",
+						"readOnly": true
+					},
+					"admin_reply_created_at": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					}
+				},
+				"required": ["created_at", "id", "is_author", "photos", "user"]
+			},
+			"ReviewCreateRequestRequest": {
+				"type": "object",
+				"properties": {
+					"product_id": {
+						"type": "integer"
+					},
+					"rating": {
+						"type": "integer",
+						"maximum": 5,
+						"minimum": 1
+					},
+					"text": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 2000
+					},
+					"is_anonymous": {
+						"type": "boolean",
+						"default": false
+					},
+					"photos": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"format": "binary"
+						},
+						"maxItems": 5
+					}
+				},
+				"required": ["product_id", "rating"]
+			},
+			"ReviewPhoto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"image": {
+						"type": "string",
+						"format": "uri"
+					}
+				},
+				"required": ["id", "image"]
+			},
+			"ReviewUpdateRequestRequest": {
+				"type": "object",
+				"properties": {
+					"text": {
+						"type": "string",
+						"nullable": true
+					},
+					"rating": {
+						"type": "integer",
+						"maximum": 5,
+						"minimum": 1
+					}
+				}
+			},
+			"ShopProductListResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"name": {
+						"type": "string",
+						"maxLength": 150
+					},
+					"category": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Category"
+							}
+						],
+						"readOnly": true
+					},
+					"base_description": {
+						"type": "string",
+						"nullable": true
+					},
+					"is_favorite": {
+						"type": "boolean",
+						"readOnly": true
+					},
+					"main_image": {
+						"type": "string",
+						"format": "uri",
+						"nullable": true
+					},
+					"attributes": {},
+					"video_source": {
+						"type": "string",
+						"nullable": true,
+						"readOnly": true
+					},
+					"display_variant": {
+						"type": "object",
+						"additionalProperties": {},
+						"nullable": true,
+						"readOnly": true
+					},
+					"photos": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Photo"
+						},
+						"readOnly": true
+					},
+					"is_active": {
+						"type": "boolean"
+					},
+					"average_rating": {
+						"type": "number",
+						"format": "double",
+						"readOnly": true
+					},
+					"purchases_count": {
+						"type": "integer",
+						"readOnly": true
+					}
+				},
+				"required": [
+					"average_rating",
+					"category",
+					"display_variant",
+					"id",
+					"is_favorite",
+					"name",
+					"photos",
+					"purchases_count",
+					"video_source"
+				]
+			},
+			"ShortProduct": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"name": {
+						"type": "string",
+						"maxLength": 150
+					}
+				},
+				"required": ["id", "name"]
+			},
+			"ShortVariantProduct": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"title": {
+						"type": "string",
+						"maxLength": 150
+					},
+					"image": {
+						"type": "string",
+						"format": "uri",
+						"nullable": true
+					},
+					"price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"old_price": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+						"nullable": true
+					},
+					"product": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ShortProduct"
+							}
+						],
+						"readOnly": true
+					},
+					"stock_status": {
+						"type": "string",
+						"readOnly": true
+					}
+				},
+				"required": ["id", "price", "product", "stock_status", "title"]
+			},
+			"Tag": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"readOnly": true
+					},
+					"name": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string",
+						"maxLength": 50,
+						"pattern": "^[-a-zA-Z0-9_]+$"
+					}
+				},
+				"required": ["id", "name", "slug"]
+			},
+			"TelegramAuthRequestRequest": {
+				"type": "object",
+				"properties": {
+					"initData": {
+						"type": "string",
+						"minLength": 1
+					},
+					"theme": {
+						"type": "string",
+						"minLength": 1,
+						"default": "light"
+					}
+				},
+				"required": ["initData"]
+			},
+			"TelegramAuthResponse": {
+				"type": "object",
+				"properties": {
+					"access_token": {
+						"type": "string"
+					}
+				},
+				"required": ["access_token"]
+			},
+			"TransactionCreateResponse": {
+				"type": "object",
+				"properties": {
+					"transaction_id": {
+						"type": "string"
+					},
+					"payload_url": {
+						"type": "string"
+					}
+				},
+				"required": ["payload_url", "transaction_id"]
+			},
+			"TransactionResponse": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"readOnly": true
+					},
+					"state": {
+						"$ref": "#/components/schemas/TransactionResponseStateEnum"
+					},
+					"order": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time",
+						"readOnly": true
+					},
+					"invoice_id": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"payment_currency": {
+						"type": "string",
+						"maxLength": 10
+					},
+					"network": {
+						"type": "string",
+						"maxLength": 50
+					},
+					"target_amount_usd": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+					},
+					"amount_crypto": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,12}(?:\\.\\d{0,8})?$",
+						"title": "Target crypto amount"
+					},
+					"current_amount_crypto": {
+						"type": "string",
+						"format": "decimal",
+						"pattern": "^-?\\d{0,12}(?:\\.\\d{0,8})?$",
+						"title": "Current crypto amount"
+					},
+					"receiver_address": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 300
+					},
+					"sender_address": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 300
+					},
+					"tx_hash": {
+						"type": "string",
+						"nullable": true,
+						"title": "Transaction hash",
+						"maxLength": 255
+					},
+					"raw_response": {
+						"nullable": true,
+						"title": "Raw gateway response"
+					}
+				},
+				"required": ["created_at", "id", "network", "order", "payment_currency"]
+			},
+			"TransactionResponseStateEnum": {
+				"enum": [
+					"pending",
+					"paid",
+					"wrong_amount",
+					"partially_paid",
+					"expired",
+					"cancelled",
+					"failed",
+					"refunded"
+				],
+				"type": "string",
+				"description": "* `pending` - Waiting for payment\n* `paid` - Successfully paid\n* `wrong_amount` - Paid wrong amount\n* `partially_paid` - Partially paid\n* `expired` - Invoice expired\n* `cancelled` - Cancelled\n* `failed` - Failed\n* `refunded` - Refunded"
+			},
+			"UserDeliveryDataRequestRequest": {
+				"type": "object",
+				"properties": {
+					"full_name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"email": {
+						"type": "string",
+						"minLength": 1
+					},
+					"phone": {
+						"type": "string",
+						"minLength": 1
+					},
+					"zip_code": {
+						"type": "string",
+						"minLength": 1
+					},
+					"address_line": {
+						"type": "string",
+						"minLength": 1
+					},
+					"destination_code": {
+						"type": "string",
+						"minLength": 1
+					},
+					"region_code": {
+						"type": "string"
+					}
+				}
+			},
+			"UserDeliveryDataResponse": {
+				"type": "object",
+				"properties": {
+					"full_name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"zip_code": {
+						"type": "string"
+					},
+					"address_line": {
+						"type": "string"
+					},
+					"destination_code": {
+						"type": "string"
+					},
+					"region_code": {
+						"type": "string"
+					},
+					"id": {
+						"type": "integer"
+					},
+					"is_current": {
+						"type": "boolean"
+					}
+				},
+				"required": ["id"]
+			},
+			"UserSettings": {
+				"type": "object",
+				"properties": {
+					"preferred_payment_currency": {
+						"type": "string"
+					},
+					"preferred_network": {
+						"type": "string"
+					},
+					"language_code": {
+						"type": "string"
+					},
+					"theme": {
+						"type": "string"
+					},
+					"particles_style": {
+						"type": "string"
+					}
+				}
+			},
+			"UserSettingsRequest": {
+				"type": "object",
+				"properties": {
+					"preferred_payment_currency": {
+						"type": "string",
+						"minLength": 1
+					},
+					"preferred_network": {
+						"type": "string",
+						"minLength": 1
+					},
+					"language_code": {
+						"type": "string",
+						"minLength": 1
+					},
+					"theme": {
+						"type": "string",
+						"minLength": 1
+					},
+					"particles_style": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+			"jwtAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}
