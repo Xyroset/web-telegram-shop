@@ -68,7 +68,7 @@ The project supports three distinct launch profiles:
 ### Step 1: Clone the Repository
 Clone the project to your server or local machine and navigate to the directory:
 ```bash
-git clone https://github.com/Xyroset/Web-Telegram-Shop.git
+git clone https://github.com/Xyroset/web-telegram-shop.git
 cd Web-Telegram-Shop
 ```
 
