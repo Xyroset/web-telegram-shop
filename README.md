@@ -62,7 +62,7 @@ The project is structured as a monorepo containing the Backend API, Telegram Bot
 - **Backend:** Python 3.12, Django, Django REST Framework (DRF), PostgreSQL.
 - **Architecture:** Clean Architecture, Domain-Driven Design concepts.
 - **Workers & Cache:** Celery, Redis, Celery Beat.
-- **Frontend:** TypeScript, React.
+- **Frontend:** TypeScript, React, Vite.
 - **Infrastructure:** Docker, Docker Compose, GitHub Actions (CI/CD).
 
 ---
